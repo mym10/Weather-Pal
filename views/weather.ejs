@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Pal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/weather.css">
+</head>
+<body>
+    <% if(locals.data) { %>
+
+    <% if(data.weather[0].main === "Thunderstorm") { %>
+        <style>
+            body{
+              background-image: url('images/Thunderstorm.jpg');
+              background-repeat: no-repeat;
+              -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+              background-size: cover;
+            }
+        </style>
+    <% } else if (data.weather[0].main === "Drizzle"){ %>
+        <style>
+            body{
+              background-image: url('images/Drizzle.jpg');
+              background-repeat: no-repeat;
+              -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+              background-size: cover;
+            }
+        </style>
+    <% } else if (data.weather[0].main === "Rain"){ %>
+        <style>
+            body{
+              background-image: url('images/rain.jpg');
+              background-repeat: no-repeat;
+              -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+              background-size: cover;
+            }
+        </style>
+    <% } else if (data.weather[0].main === "Snow"){ %>
+        <style>
+            body{
+              background-image: url('images/snow.jpg');
+              background-repeat: no-repeat;
+              -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+              background-size: cover;
+            }
+        </style>
+    <% } else if (data.weather[0].main === "Clear"){ %>
+        <style>
+            body{
+              background-image: url('images/clear.jpg');
+              background-repeat: no-repeat;
+              -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+              background-size: cover;
+            }
+        </style>
+    <% } else if (data.weather[0].main === "Clouds"){ %>
+        <style>
+            body{
+              background-image: url('images/clouds.jpg');
+              background-repeat: no-repeat;
+              -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+              background-size: cover;
+            }
+        </style>
+    <% } else { %>
+        <style>
+            body{
+              background-image: url('images/mist.jpg');
+              background-repeat: no-repeat;
+              -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+              background-size: cover;
+            }
+        </style>
+
+    <% } %>
+
+    <div class="container">
+        <div class="card" >
+            <div class="weather">
+                <div class="title">
+                    <h2 class="city">Weather in <%= data.name %></h2>
+                    <img src="<%=image%>" alt="weather icon">
+                </div>
+                <h1 class="temp"><%= data.main.temp %>°C</h1>
+                <div class="description"><%= data.weather[0].description %></div>
+                <div class="humidity">Humidity: <%= data.main.humidity %>%</div>
+                <div class="wind">Wind speed: <%= data.wind.speed %>m/sec</div>
+            </div>
+        </div>
+        <div class="card" >
+            <div class="UVradiation">
+                <div class="title">
+                    <h2 class="uv">Current UV radiation: <%= uvdata %></h2>
+                </div>
+                <div>
+                    <% if(Math.round(uvdata) === 0 || Math.round(uvdata) === 1 || Math.round(uvdata) === 2) { %>
+                        <p>The sun's got nothing on you but minimal sun protection is absolutely required for normal activity. </p>
+                        <h2>SPF 30</h2>              
+                    <% } else if(Math.round(uvdata) === 3 || Math.round(uvdata) === 4 || Math.round(uvdata) === 5) { %>
+                        <p>Covering up, wear a hat, grab your sunglasses and sunscreen, especially if you will be outside for 30 minutes or more. Look for shade near midday when the sun is strongest.</p>
+                        <h2>SPF 30</h2>
+                    <% } else if(Math.round(uvdata) === 6 || Math.round(uvdata) === 7) { %>
+                        <p>This can damages the skin and can cause sunburn. Reduce time in the sun between 11 a.m. and 3 p.m. and take full precaution by seeking shade, covering up exposed skin, wearing a hat and sunglasses, and applying sunscreen.</p>
+                        <h2>SPF 40-50</h2>
+                    <% } else if(Math.round(uvdata) === 8 || Math.round(uvdata) === 9 || Math.round(uvdata) === 10) { %>
+                        <p>Extra precaution required - unprotected skin will be damaged and can burn quickly. Avoid the sun between 11 a.m. and 3 p.m. and seek shade, cover up, and wear a hat, sunglasses and DO NOT FORGET THE SUNSCREEN.</p>
+                        <h2>SPF 40-50</h2>
+                    <% } else { %>
+                        <p>Where exactly are you? DO NOT GO OUT. NO.</p>
+                        <h2>SPF 50</h2>
+                    <% } %>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <% } %>
+    <% if(locals.error){ %>
+        <div id="tag-error" class="tag-error" >
+        <h1 class="error"><%= error %> <a href="mailto:mythridantu1010@gmail.com"></a></h1>
+        </div>
+    <% } %>
+    
+</body>
+</html>
