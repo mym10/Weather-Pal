@@ -4,7 +4,7 @@ import axios from "axios";
 
 const app = express();
 const port = 3000;
-
+const API_KEY = null;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 app.post("/weather", async (req, res) => {
     try {
         const city = req.body.cityName;
-        const apiid = "insert api key of openweathermap.org";
+        const apiid = API_KEY;
         const API_URL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=" + apiid;
         const response= await axios.get(API_URL);
         const result = response.data;
